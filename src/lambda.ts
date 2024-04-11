@@ -6,7 +6,7 @@ export const handler = async ({ to, message }: LambdaEvent): Promise<void> => {
   let authToken: string | undefined;
 
   try {
-    authToken = await fetchAuthToken(process.env.TWILIO_AUTH_TOKEN_PARAMETER_NAME);
+    authToken = await fetchAuthToken(process.env.TWILIO_AUTH_TOKEN_PARAMETER_NAME!);
   } catch (error) {
     // Catch and log error, then rethrow generic error to prevent any sensitive data from being exposed
     console.error('An error occurred fetching the Auth Token. Error was %s', error);
