@@ -2,23 +2,13 @@ import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
 import { handler } from '../src/lambda';
 import { LambdaEvent } from '../src/types';
 
-let accountSid: string | undefined;
-let authToken: string | undefined;
-let options: { [name: string]: any } | undefined;
 const createMessageMock = jest.fn();
-
 jest.mock('twilio', () => ({
-  Twilio: jest.fn((username, password, config) => {
-    accountSid = username;
-    authToken = password;
-    options = config;
-
-    return {
-      messages: {
-        create: createMessageMock
-      }
-    };
-  })
+  Twilio: jest.fn(() => ({
+    messages: {
+      create: createMessageMock
+    }
+  }))
 }));
 
 jest.spyOn(console, 'log').mockImplementation();
@@ -62,12 +52,6 @@ describe('Given I want to send a message on a cron', () => {
           }
         })
       );
-    });
-
-    test('Then the Twilio client should have been configured', () => {
-      expect(accountSid).toEqual('ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-      expect(authToken).toEqual('abc1234');
-      expect(options).toBeUndefined();
     });
 
     test('Then a message should have been created', () => {

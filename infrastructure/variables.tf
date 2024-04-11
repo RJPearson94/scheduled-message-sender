@@ -57,8 +57,3 @@ variable "schedule_expression" {
   default     = "rate(1 hour)"
 }
 
-variable "schedule_enabled" {
-  description = "Whether the schedule is enabled"
-  type        = bool
-  default     = true
-}

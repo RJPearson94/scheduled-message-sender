@@ -4,6 +4,8 @@ This is an example lambda function that is invoked on a schedule to send an SMS 
 
 The [lambda function](https://aws.amazon.com/lambda/) is written in [TypeScript](https://www.typescriptlang.org/) with tests written using the [Jest testing framework](https://jestjs.io/), the lambda is triggered by a scheduled event from [EventBridge](https://aws.amazon.com/eventbridge/) and fetches a the Twilio Auth Token from [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) before sending an SMS to a phone number using [Programmable SMS](https://www.twilio.com/docs/sms) from Twilio.
 
+This project uses [pnpm](https://pnpm.io/) as its package manager.
+
 ![Architecture](docs/diagrams/Architecture.png)
 
 ## Getting Started
@@ -11,22 +13,20 @@ The [lambda function](https://aws.amazon.com/lambda/) is written in [TypeScript]
 To install the dependencies, please run the following command:
 
 ```sh
-npm install
+pnpm install
 ```
 
 To run the tests, please run the following command:
 
 ```sh
-npm run test
+pnpm run test
 ```
 
 [esbuild](https://github.com/evanw/esbuild) is used to build the lambda artifact that is deployed to AWS Lambda. To build and zip the lambda artifact, please run the following command
 
 ```sh
-npm run build
+pnpm run build
 ```
-
-[Prettier](https://prettier.io/) is used to format the code and [eslint](https://eslint.org/) is used to lint the JavaScript and TypeScript code. [Husky](https://github.com/typicode/husky) is used to provide git hooks to lint and format the code before any changes are committed, this uses [lint-staged](https://github.com/okonet/lint-staged). Husky is also used to ensure any commit message complies with the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
 ## Deploying the application
 

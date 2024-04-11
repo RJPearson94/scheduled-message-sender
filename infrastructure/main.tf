@@ -20,7 +20,7 @@ resource "aws_lambda_function" "lambda_function" {
   function_name = var.function_name
   role          = aws_iam_role.lambda_iam.arn
 
-  runtime     = "nodejs14.x"
+  runtime     = "nodejs20.x"
   handler     = "main.handler"
   memory_size = 256
   timeout     = 10
@@ -101,7 +101,6 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution_role_attachmen
 
 resource "aws_cloudwatch_event_rule" "event_rule" {
   schedule_expression = var.schedule_expression
-  is_enabled          = var.schedule_enabled
 }
 
 resource "aws_cloudwatch_event_target" "event_target" {
